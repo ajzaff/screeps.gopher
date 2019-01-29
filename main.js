@@ -1,30 +1,36 @@
-// gc Garbage collection loop.
+var errors = require('helper.errors');
+
+// gc is a standard garbage collection loop.
+// It finds orphaned creeps and deletes associated memory.
 function gc(config) {
-    for(var name in Memory.creeps) {
+    for(let name in Memory.creeps) {
         if(!Game.creeps[name]) {
+            console.log('[GC] Clearing orphaned creep memory:', name);
             delete Memory.creeps[name];
-            console.log('Clearing non-existing creep memory:', name);
         }
     }
 }
 
-// autospawn creeps based on config.
-function autospawn(config) {
+// autoscale creeps based on config.
+// This might kill units if above the ceiling.
+function autoscale(config) {
     for (let role in config) {
         let allCreeps = _.filter(Game.creeps, (creep) => creep.memory.role == role);
 
-        if(allCreeps.length < config[role].ceiling) {
+        if(allCreeps.length < config[role].minimum) {
             let roleConfig = config._roles[role];
             let newName = 'gopher' + Game.time;
             let ret = Game.spawns['Spawn1'].spawnCreep(roleConfig.permissions,
                 newName,
                 {memory: {role: role}});
+            console.log('[AUTOSPAWN] Spawning creep: '+newName+' (role='+role+') had result: '+errors.string(ret));
             if (ret == OK) {
-                console.log('Spawning new role='+role+': ' + newName);
                 break; // Successful spawn.
-            } else {
-                console.log('Failed to spawn role='+role+': '+newName+': returned: '+config._errors(ret));
             }
+        }
+        
+        if (allCreeps.length > config[role].ceiling) {
+            // Kill a random "idle" unit when above the ceiling.
         }
     }
     // Visual flair for autospawn.
@@ -46,21 +52,19 @@ function run(config) {
         let creepConfig = config._roles[creep.memory.role];
         if (creepConfig) {
             let res = creepConfig.run(creep, config);
-            console.log('Running creep: '+name+' had result: '+config._errors(res));
+            console.log('[RUNNER] Running creep: '+name+' (role='+creep.memory.role+') had result: '+errors.string(res));
         } else {
-            console.log('Running creep: '+name+' had unexpected role: '+creep.memory.role);
+            console.log('[RUNNER] Running creep: '+name+' (role='+creep.memory.role+') had unexpected role: '+creep.memory.role);
         }
     }
 }
 
-module.exports.loop = function () {
+module.exports.loop = function() {
     // Garbage collection.
     gc(require('config.gc'));
 
-    // Autospawn creeps.
-    // Config format:
-    //  'role': CEILING
-    autospawn(require('config.autospawn'));
+    // Autoscale creeps.
+    autoscale(require('config.autoscaler'));
 
     // Run creeps by role.
     run(require('config.run'));
