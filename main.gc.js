@@ -8,5 +8,5 @@ module.exports = {
                 delete Memory.creeps[name];
             }
         }
-    }
+    },
 };

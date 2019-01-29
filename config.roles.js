@@ -46,5 +46,5 @@ module.exports = {
             CARRY,
         ],
         module: require('role.patroller'),
-    }
+    },
 };

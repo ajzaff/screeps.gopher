@@ -36,5 +36,5 @@ module.exports = {
         minimum: 8,
         maximum: 8,
         ceiling: 8,
-    }
+    },
 };
