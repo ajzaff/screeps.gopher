@@ -7,7 +7,7 @@ module.exports = {
         for(let name in Game.creeps) {
             let creep = Game.creeps[name];
             let creepConfig = config._roles[creep.memory.role];
-            if (creepConfig && creepConfig.module && creepConfig.module.run) {
+            if (creepConfig && creepConfig.module && creepConfig.module.Run) {
                 let res = creepConfig.module.Run(creep, config);
                 console.log('[RUNNER] Running creep: '+name+' (role='+creep.memory.role+') had result: '+errors.string(res));
             } else {
