@@ -20,11 +20,11 @@ function autoscale(config) {
 
         if(allCreeps.length < config[role].minimum) {
             let roleConfig = config._roles[role];
-            let newName = 'gopher' + Game.time;
+            let newName = 'gopher_' + role + '-' + Game.time;
             let ret = Game.spawns['Spawn1'].spawnCreep(roleConfig.permissions,
                 newName,
                 {memory: {role: role, status: statuses.STATUS_IDLE}});
-            console.log('[AUTOSPAWN] Spawning creep: '+newName+' (role='+role+') had result: '+errors.string(ret));
+            console.log('[AUTOSCALE] Spawning creep: '+newName+' (role='+role+') had result: '+errors.string(ret));
             if (ret == OK) {
                 break; // Successful spawn.
             }

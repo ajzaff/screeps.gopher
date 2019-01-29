@@ -33,8 +33,8 @@ var configAutoscaler = {
     },
     patroller: {
         priority: 150,
-        minimum: 4,
-        maximum: 5,
+        minimum: 8,
+        maximum: 8,
         ceiling: 8,
     }
 }

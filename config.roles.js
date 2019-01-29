@@ -40,8 +40,10 @@ var configRoles = {
     },
     patroller: {
         permissions: [
+            WORK,
             MOVE,
             ATTACK,
+            CARRY,
         ],
         module: require('role.patroller'),
     }

@@ -30,5 +30,7 @@ module.exports = {
                 return creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#ffaa00'}});
             }
         }
+
+        return OK;
     }
 };
