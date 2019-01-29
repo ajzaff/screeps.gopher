@@ -13,6 +13,12 @@
 //  }
 var configAutoscaler = {
     _roles: require('config.roles'),
+    builder: {
+        priority: 100,
+        minimum: 4,
+        maximum: 4,
+        ceiling: 1,
+    },
     harvester: {
         priority: 200,
         minimum: 4,
@@ -20,13 +26,13 @@ var configAutoscaler = {
         ceiling: 4,
     },
     upgrader: {
-        priority: 150,
+        priority: 200,
         minimum: 8,
         maximum: 8,
         ceiling: 8,
     },
     patroller: {
-        priority: 110,
+        priority: 150,
         minimum: 4,
         maximum: 5,
         ceiling: 8,

@@ -14,6 +14,14 @@
 //      ],
 //  }
 var configRoles = {
+    builder: {
+        permissions: [
+            WORK,
+            MOVE,
+            CARRY,
+        ],
+        module: require('role.builder'),
+    },
     harvester: {
         permissions: [
             WORK,
