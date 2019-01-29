@@ -1,4 +1,5 @@
 var errors = require('helper.errors');
+var statuses = require('helper.statuses');
 
 // gc is a standard garbage collection loop.
 // It finds orphaned creeps and deletes associated memory.
@@ -22,7 +23,7 @@ function autoscale(config) {
             let newName = 'gopher' + Game.time;
             let ret = Game.spawns['Spawn1'].spawnCreep(roleConfig.permissions,
                 newName,
-                {memory: {role: role}});
+                {memory: {role: role, status: statuses.STATUS_IDLE}});
             console.log('[AUTOSPAWN] Spawning creep: '+newName+' (role='+role+') had result: '+errors.string(ret));
             if (ret == OK) {
                 break; // Successful spawn.
@@ -50,11 +51,11 @@ function run(config) {
     for(let name in Game.creeps) {
         let creep = Game.creeps[name];
         let creepConfig = config._roles[creep.memory.role];
-        if (creepConfig) {
-            let res = creepConfig.run(creep, config);
+        if (creepConfig && creepConfig.module && creepConfig.module.run) {
+            let res = creepConfig.module.run(creep, config);
             console.log('[RUNNER] Running creep: '+name+' (role='+creep.memory.role+') had result: '+errors.string(res));
         } else {
-            console.log('[RUNNER] Running creep: '+name+' (role='+creep.memory.role+') had unexpected role: '+creep.memory.role);
+            console.log('[RUNNER] Running creep: '+name+' (role='+creep.memory.role+') failed (incomplete definition)');
         }
     }
 }

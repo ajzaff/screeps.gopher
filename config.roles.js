@@ -20,7 +20,7 @@ var configRoles = {
             MOVE,
             CARRY,
         ],
-        run: require('role.harvester').run,
+        module: require('role.harvester'),
     },
     upgrader: {
         permissions: [
@@ -28,8 +28,15 @@ var configRoles = {
             MOVE,
             CARRY,
         ],
-        run: require('role.upgrader').run,
+        module: require('role.upgrader'),
     },
+    patroller: {
+        permissions: [
+            MOVE,
+            ATTACK,
+        ],
+        module: require('role.patroller'),
+    }
 };
 
 module.exports = configRoles;
