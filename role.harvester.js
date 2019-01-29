@@ -1,5 +1,5 @@
-var roleHarvester = {
-    run: function(creep, config) {
+module.exports = {
+    Run: function(creep, config) {
         if(creep.carry.energy < creep.carryCapacity) {
             var source = creep.pos.findClosestByPath(FIND_SOURCES);
             if (source && creep.harvest(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
@@ -20,7 +20,5 @@ var roleHarvester = {
             }
         }
         return OK;
-    }
+    },
 };
-
-module.exports = roleHarvester;

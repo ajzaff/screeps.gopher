@@ -8,11 +8,11 @@ module.exports = {
             let creep = Game.creeps[name];
             let creepConfig = config._roles[creep.memory.role];
             if (creepConfig && creepConfig.module && creepConfig.module.run) {
-                let res = creepConfig.module.run(creep, config);
+                let res = creepConfig.module.Run(creep, config);
                 console.log('[RUNNER] Running creep: '+name+' (role='+creep.memory.role+') had result: '+errors.string(res));
             } else {
                 console.log('[RUNNER] Running creep: '+name+' (role='+creep.memory.role+') failed (incomplete definition)');
             }
         }
-    }
+    },
 };

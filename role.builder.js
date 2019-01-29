@@ -1,5 +1,5 @@
 module.exports = {
-    run: function(creep, config) {
+    Run: function(creep, config) {
         if (creep.memory.working == undefined) {
             creep.memory.working = false;
         }
@@ -37,5 +37,5 @@ module.exports = {
         }
 
         return OK;
-    }
+    },
 };

@@ -1,4 +1,4 @@
-// configures the autoscaler capabilities of spawn points.
+// Configures the autoscaler capabilities of spawn points.
 // !! The roles defined here should accompany an entry in the configRoles map !!
 // Config format:
 //  {

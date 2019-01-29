@@ -1,4 +1,4 @@
-// configRoles configures the roles assignable to creeps, what permissions they
+// Configures the roles assignable to creeps, what permissions they
 // have and the code for the run function.
 // Format:
 //  'ROLE': {
@@ -13,7 +13,7 @@
 //          CLAIM,
 //      ],
 //  }
-var configRoles = {
+module.exports = {
     builder: {
         permissions: [
             WORK,
@@ -48,5 +48,3 @@ var configRoles = {
         module: require('role.patroller'),
     }
 };
-
-module.exports = configRoles;

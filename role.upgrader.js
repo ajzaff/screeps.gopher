@@ -1,5 +1,5 @@
-var roleUpgrader = {
-    run: function(creep, config) {
+module.exports = {
+    Run: function(creep, config) {
         if (creep.memory.upgrading == undefined) {
             creep.memory.upgrading = true;
         }
@@ -24,8 +24,5 @@ var roleUpgrader = {
             }
         }
         return OK;
-    }
+    },
 };
-
-
-module.exports = roleUpgrader;
