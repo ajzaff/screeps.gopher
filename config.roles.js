@@ -28,7 +28,7 @@ var configRoles = {
             MOVE,
             CARRY,
         ],
-        run: require('role.harvester').run,
+        run: require('role.upgrader').run,
     },
 };
 
