@@ -9,7 +9,7 @@ module.exports = {
             }
         } else {
             // Upgrade when no targets detected.
-            return roleUpgrader.run(creep, config);
+            return roleUpgrader.Run(creep, config);
         }
         return OK;
     },
