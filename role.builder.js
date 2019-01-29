@@ -22,6 +22,11 @@ module.exports = {
                 if (creep.build(constructionSite) == ERR_NOT_IN_RANGE) {
                     return creep.moveTo(constructionSite);
                 }
+            } else {
+                // Upgrade the controller when no construction sites available.
+                if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
+                    return creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#ffffff'}});
+                }
             }
         } else {
             // Find energy.

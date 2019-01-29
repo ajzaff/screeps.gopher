@@ -1,4 +1,4 @@
-// configAutoscaler configures the autoscaler capabilities of spawn points.
+// configures the autoscaler capabilities of spawn points.
 // !! The roles defined here should accompany an entry in the configRoles map !!
 // Config format:
 //  {
@@ -11,7 +11,7 @@
 //          ceiling: X, // Any amount above this value is subject to removal.
 //      }
 //  }
-var configAutoscaler = {
+module.exports = {
     _roles: require('config.roles'),
     builder: {
         priority: 100,
@@ -37,6 +37,4 @@ var configAutoscaler = {
         maximum: 8,
         ceiling: 8,
     }
-}
-
-module.exports = configAutoscaler;
+};
