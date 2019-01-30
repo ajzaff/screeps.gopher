@@ -10,7 +10,7 @@ module.exports = {
             if(allCreeps.length < config[role].minimum) {
                 let roleConfig = config._roles[role];
                 let newName = 'gopher_' + role + '-' + Game.time;
-                let ret = Game.spawns['Spawn1'].spawnCreep(roleConfig.permissions,
+                let ret = Game.spawns['Spawn1'].spawnCreep(roleConfig.parts,
                     newName,
                     {memory: {role: role, status: statuses.STATUS_IDLE}});
                 console.log('[AUTOSCALE] Spawning creep: '+newName+' (role='+role+') had result: '+errors.string(ret));

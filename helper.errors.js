@@ -15,7 +15,7 @@ module.exports = {
         case -11: return 'ERR_TIRED(-11): fatigued';
         case -12: return 'ERR_NO_BODYPART(-12): lacks permission: MOVE';
         case -14: return 'ERR_RCL_NOT_ENOUGH(-14): insufficient room Controller level';
-        default:  return 'ERR_UNKNWON('+ret+'): an unknown error occurred';
+        default:  return 'ERR_UNKNOWN('+ret+'): an unknown error occurred';
         }
     },
 };

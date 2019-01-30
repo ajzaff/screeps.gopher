@@ -2,7 +2,7 @@
 // have and the code for the run function.
 // Format:
 //  'ROLE': {
-//      permissions: [      // Assinged permissions. This is the entire "body".
+//      parts: [            // Assinged parts. This is the entire "body" arg.
 //          WORK,           // See: <//docs.screeps.com/api/#StructureSpawn>
 //          MOVE,
 //          CARRY,
@@ -15,34 +15,34 @@
 //  }
 module.exports = {
     builder: {
-        permissions: [
+        parts: [
             WORK,
-            MOVE,
-            CARRY,
+            MOVE, MOVE,
+            CARRY, CARRY,
         ],
         module: require('role.builder'),
     },
     harvester: {
-        permissions: [
+        parts: [
             WORK,
-            MOVE,
-            CARRY,
+            MOVE, MOVE,
+            CARRY, CARRY,
         ],
         module: require('role.harvester'),
     },
     upgrader: {
-        permissions: [
+        parts: [
             WORK,
-            MOVE,
-            CARRY,
+            MOVE, MOVE,
+            CARRY, CARRY,
         ],
         module: require('role.upgrader'),
     },
     patroller: {
-        permissions: [
+        parts: [
             WORK,
-            MOVE,
-            ATTACK,
+            MOVE, MOVE, MOVE,
+            ATTACK, ATTACK,
             CARRY,
         ],
         module: require('role.patroller'),
