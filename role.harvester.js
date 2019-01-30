@@ -1,3 +1,5 @@
+const roleUpgrader = require('role.upgrader');
+
 module.exports = {
     Run: function(creep, config) {
         if(creep.carry.energy < creep.carryCapacity) {
@@ -6,17 +8,21 @@ module.exports = {
                 return creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
             }
         } else {
-            var targets = creep.room.find(FIND_STRUCTURES, {
+            var target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return (structure.structureType == STRUCTURE_EXTENSION
-                            || structure.structureType == STRUCTURE_SPAWN)
+                            || structure.structureType == STRUCTURE_SPAWN
+                            || structure.structureType == STRUCTURE_TOWER)
                         && structure.energy < structure.energyCapacity;
                 }
             });
-            if(targets.length > 0) {
-                if(creep.transfer(targets[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    return creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
+            if(target) {
+                if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    return creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
                 }
+            } else {
+                // Upgrade.
+                return roleUpgrader.Run(creep, config);
             }
         }
         return OK;
