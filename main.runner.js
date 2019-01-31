@@ -1,4 +1,5 @@
 var errors = require('helper.errors');
+var structureTower = require('structure.tower');
 
 module.exports = {
     // Run all creeps/structures by role.
@@ -10,21 +11,7 @@ module.exports = {
             let res = -999;
             switch (structure.structureType) {
             case STRUCTURE_TOWER:
-                var closestHostile = structure.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-                if(closestHostile) {
-                    let res = structure.attack(closestHostile);
-                } else if (structure.energy > structure.energyCapacity/2) {
-                    // No hostiles and surplus energy. Repair mode.
-                    var closestDamagedStructure = structure.pos.findClosestByRange(FIND_STRUCTURES, {
-                        filter: (structure) => structure.hits < structure.hitsMax
-                    });
-                    if(closestDamagedStructure) {
-                        let res = structure.repair(closestDamagedStructure);
-                    }
-                } else {
-                    let res = OK;
-                }
-                break;
+                let res = structureTower.Run(structure);
             }
             console.log('[RUNNER] Running structure: '+name+' (type='+structure.structureType+') had result: '+errors.string(res));
         }
