@@ -21,15 +21,15 @@ module.exports = {
     },
     harvester: {
         priority: 200,
-        minimum: 4,
-        maximum: 4,
-        ceiling: 4,
+        minimum: 6,
+        maximum: 6,
+        ceiling: 6,
     },
     upgrader: {
         priority: 200,
-        minimum: 4,
-        maximum: 4,
-        ceiling: 4,
+        minimum: 6,
+        maximum: 6,
+        ceiling: 6,
     },
     patroller: {
         priority: 150,

@@ -26,13 +26,18 @@ module.exports = {
                 }
                 return OK;
             }
-            // Attempt to move energy into extensions, spawns, and towers.
+            // Attempt to move energy into min extension, spawn, or tower.
+            var min = 10000;
             var target = creep.pos.findClosestByPath(FIND_STRUCTURES, {
                 filter: (structure) => {
-                    return (structure.structureType == STRUCTURE_EXTENSION
+                    st = (structure.structureType == STRUCTURE_EXTENSION
                             || structure.structureType == STRUCTURE_SPAWN
-                            || structure.structureType == STRUCTURE_TOWER)
-                        && structure.energy < structure.energyCapacity;
+                            || structure.structureType == STRUCTURE_TOWER);
+                    if (st && structure.energy < min) {
+                        min = structure.energy;
+                        return true;
+                    }
+                    return false;
                 }
             });
             if (target) {
