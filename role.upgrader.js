@@ -1,3 +1,5 @@
+const roleHarvester = require('role.harvester');
+
 module.exports = {
     Run: function(creep, config) {
         if (creep.memory.upgrading == undefined) {
@@ -18,9 +20,15 @@ module.exports = {
                 return creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#ffffff'}});
             }
         } else {
-            var sources = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-                return creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#ffaa00'}});
+            // Use storage. Fallback to harvester.
+            var source = creep.room.storage;
+            if (!source || source[RESOURCE_ENERGY] == 0) {
+                source = creep.pos.findClosestByPath(FIND_SOURCES);
+                if (source && creep.harvest(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    return creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
+                }
+            } else {
+                return roleHarvester.Run(creep, config);
             }
         }
         return OK;

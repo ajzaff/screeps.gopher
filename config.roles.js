@@ -25,8 +25,8 @@ module.exports = {
     harvester: {
         parts: [
             WORK,
-            MOVE, MOVE,
-            CARRY, CARRY,
+            MOVE,
+            CARRY,
         ],
         module: require('role.harvester'),
     },

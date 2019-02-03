@@ -20,7 +20,7 @@ module.exports = {
             }
             
             if (allCreeps.length > config[role].ceiling) {
-                // Kill a random "idle" unit when above the ceiling.
+                // TODO(ajzaff): Kill a random "idle" unit when above the ceiling.
             }
         }
         // Visual flair for autospawn.

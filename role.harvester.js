@@ -1,5 +1,3 @@
-const roleUpgrader = require('role.upgrader');
-
 module.exports = {
     Run: function(creep, config) {
         if (creep.memory.robin === undefined) {
@@ -11,18 +9,21 @@ module.exports = {
                 return creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
             }
         } else {
-            var targets = creep.room.find(FIND_STRUCTURES, {
-                filter: (structure) => {
-                    return (structure.structureType == STRUCTURE_EXTENSION
-                            || structure.structureType == STRUCTURE_SPAWN
-                            || structure.structureType == STRUCTURE_TOWER
-                            || structure.structureType == STRUCTURE_STORAGE)
-                        && structure.energy < structure.energyCapacity;
-                }
-            });
-            if(targets.length > 0) {
-                creep.memory.robin %= targets.length;
-                let target = targets[creep.memory.robin];
+            // Prefer storage fallback to spawns towers or extensions.
+            var target = creep.room.storage;
+            if (!target) {
+                var targets = creep.room.find(FIND_STRUCTURES, {
+                    filter: (structure) => {
+                        return (structure.structureType == STRUCTURE_EXTENSION
+                                || structure.structureType == STRUCTURE_SPAWN
+                                || structure.structureType == STRUCTURE_TOWER)
+                            && structure.energy < structure.energyCapacity;
+                    }
+                });
+                 creep.memory.robin %= targets.length;
+                target = targets[creep.memory.robin];
+            }
+            if(target) {
                 ret = creep.transfer(target, RESOURCE_ENERGY);
                 switch (ret) {
                 case ERR_NOT_IN_RANGE:
@@ -35,8 +36,8 @@ module.exports = {
                     return ret;
                 }
             } else {
-                // Upgrade.
-                return roleUpgrader.Run(creep, config);
+                // Who knows. Cry?
+                creep.say('unexpected condition');
             }
         }
         return OK;

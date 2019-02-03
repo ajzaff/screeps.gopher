@@ -17,7 +17,7 @@ module.exports = {
         priority: 100,
         minimum: 4,
         maximum: 4,
-        ceiling: 1,
+        ceiling: 4,
     },
     harvester: {
         priority: 200,
@@ -27,14 +27,14 @@ module.exports = {
     },
     upgrader: {
         priority: 200,
-        minimum: 8,
-        maximum: 8,
-        ceiling: 8,
+        minimum: 4,
+        maximum: 4,
+        ceiling: 4,
     },
     patroller: {
         priority: 150,
-        minimum: 8,
-        maximum: 8,
-        ceiling: 8,
+        minimum: 4,
+        maximum: 4,
+        ceiling: 4,
     },
 };
