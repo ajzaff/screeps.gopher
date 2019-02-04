@@ -23,7 +23,7 @@ module.exports = {
             // Use storage. Fallback to harvester.
             var source = creep.room.storage;
             if (source && source.store[RESOURCE_ENERGY] > 0) {
-                if (creep.transfer(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     return creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
                 }
                 return OK;
