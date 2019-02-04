@@ -1,4 +1,5 @@
 const roleHarvester = require('role.harvester');
+const roleUpgrader = require('role.upgrader');
 
 module.exports = {
     Run: function(creep, config) {
